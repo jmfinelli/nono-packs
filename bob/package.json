@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "bob",
+  "version": "0.1.0",
+  "description": "IBM Bob Shell agent profile and sandbox-awareness skill for working inside a nono security sandbox.",
+  "license": "Apache-2.0",
+  "platforms": ["macos", "linux"],
+  "min_nono_version": "0.61.0",
+  "keywords": ["bob", "ibm", "bobshell", "nono", "sandbox", "security", "capabilities"],
+  "artifacts": [
+    { "type": "profile", "path": "policy.json", "install_as": "bob" },
+    { "type": "plugin", "path": "README.md" },
+    { "type": "plugin", "path": "skills/nono-sandbox/SKILL.md" },
+    { "type": "plugin", "path": "wiring/profile-drafts-dir-marker" }
+  ],
+  "wiring": [
+    {
+      "type": "write_file",
+      "source": "wiring/profile-drafts-dir-marker",
+      "dest": "$NONO_CONFIG/profile-drafts/.nono-bob-pack-marker"
+    },
+    {
+      "type": "write_file",
+      "source": "skills/nono-sandbox/SKILL.md",
+      "dest": "$HOME/.bob/skills/nono-sandbox/SKILL.md"
+    }
+  ]
+}

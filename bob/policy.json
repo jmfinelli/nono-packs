@@ -1,0 +1,56 @@
+{
+  "extends": "default",
+  "meta": {
+    "name": "bob",
+    "version": "1.0.0",
+    "description": "IBM Bob Shell agent profile (registry-managed)",
+    "author": "nolabs-ai"
+  },
+  "groups": {
+    "include": [
+      { "name": "user_caches_macos", "when": "macos" },
+      { "name": "user_caches_linux", "when": "linux" },
+      "node_runtime",
+      "rust_runtime",
+      "python_runtime",
+      { "name": "linux_sysfs_read", "when": "linux" },
+      "nix_runtime",
+      "git_config",
+      "unlink_protection"
+    ]
+  },
+  "security": {
+    "signal_mode": "isolated",
+    "capability_elevation": false
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/.bob",
+      "$NONO_CONFIG/profile-drafts",
+      "/tmp/bob-$UID"
+    ],
+    "read": [
+      "$NONO_PACKAGES",
+      "$NONO_CONFIG/profiles",
+      { "path": "$HOME", "when": "macos" }
+    ]
+  },
+  "allow_parent_of_protected": true,
+  "diagnostics": {
+    "suppress_system_services": ["forbidden-exec-sugid"]
+  },
+  "network": { "block": false },
+  "workdir": { "access": "readwrite" },
+  "open_urls": {
+    "allow_origins": [
+      "https://bob.ibm.com",
+      "https://status.bob.ibm.com"
+    ],
+    "allow_localhost": true
+  },
+  "allow_launch_services": true,
+  "rollback": {
+    "exclude_patterns": ["node_modules", ".next", "__pycache__", "target"],
+    "exclude_globs": ["*.tmp.[0-9]*.[0-9a-f]*"]
+  }
+}

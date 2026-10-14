@@ -30,6 +30,7 @@ Local config files under `~/.config/nono/packages/always-further/` are also safe
 
 Current packs in this repository include:
 
+- [`bob`](./bob): IBM Bob Shell agent profile and sandbox-awareness skill for working inside the `nono` sandbox
 - [`claude`](./claude): Claude Code integration for working inside the `nono` sandbox
 - [`claude-autoresearch`](./claude-autoresearch): GPU-enabled profile and plugin for running [autoresearch](https://github.com/Kexin-xu-01/autoresearch-nono) autonomous ML loops inside the `nono` sandbox — A100/CUDA workloads with kernel-level enforcement inherited by training subprocesses
 - [`codex`](./codex): Codex integration for working inside the `nono` sandbox
